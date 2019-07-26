@@ -211,10 +211,10 @@ namespace Assets.PlayabilityCheck.PathFinding
 						continue;
 
 					//If revisiting, only continue if it can add something new to the table
-					/*Debug.Log("SuccessorXY is " + successorXY + ". X = " + successorX + ". Y = " + successorY
+					Debug.Log("SuccessorXY is " + successorXY + ". X = " + successorX + ". Y = " + successorY
 						+ ". CurrentX = " + currentX + ". CurrentY = " + currentY 
 						+ ". Direction is "+direction[i,0]+","+direction[i,1]
-						+ ". NewJumpLength is"+newJumpLength); */
+						+ ". NewJumpLength is"+newJumpLength); 
 					if (nodes[successorXY].Count > 0)
 					{
 						int lowestJump = short.MaxValue;
@@ -324,7 +324,7 @@ namespace Assets.PlayabilityCheck.PathFinding
 			if (x < 0 || x >= GridManager.Instance.GridWidth)
 				return true;
 			else if (y < 0 || y >= GridManager.Instance.GridHeight)
-				return true;
+				return false;
 			return GridManager.Instance.ContainsSolid(x, y);
 		}
 
