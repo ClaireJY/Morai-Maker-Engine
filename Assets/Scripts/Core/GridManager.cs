@@ -58,12 +58,15 @@ namespace Assets.Scripts.Core
                     AddGridObject(gridObject.Data, gridObject.X, gridObject.Y, false);
             }
 
-            GridSizeChanged(x, y);
+			if (GridSizeChanged != null)
+				GridSizeChanged(x, y);
         }
 
         public void ClearGrid()
         {
 			LogHandler.Instance.WriteLine ("Grid Cleared:  time = "+Time.time);
+			if (gridObjects == null)
+				return;
             foreach(GridObject gridObject in gridObjects)
                 Destroy(gridObject.gameObject);
             gridObjects.Clear();
@@ -146,6 +149,18 @@ namespace Assets.Scripts.Core
 
             return (functional ? gridFunctional[x, y] : gridDecorative[x, y]) != null;
         }
+
+		public bool ContainsSolid(int x, int y){
+			if (ContainsGridObject(true, x, y)) {
+				if (gridFunctional [x, y].Data.Name != "Coin") {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
 
         public string FormatToCSV()
         {

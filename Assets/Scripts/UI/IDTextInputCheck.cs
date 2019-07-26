@@ -37,7 +37,12 @@ public class IDTextInputCheck : MonoBehaviour {
 				Constants.directory=Application.dataPath;
 			}
 			else{
-				Constants.directory=Application.dataPath + "/Resources/Data";
+				if (Application.platform == RuntimePlatform.WindowsPlayer){
+					Constants.directory=Application.dataPath;
+				}
+				else{
+					Constants.directory=Application.dataPath + "/Resources/Data";
+				}
 			}
 			SceneManager.LoadScene ("Main");
 		}

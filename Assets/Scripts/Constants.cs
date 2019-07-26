@@ -11,7 +11,7 @@ public class Constants : MonoBehaviour {
 	public static readonly string BREAKABLE = "Breakable";
 	public static readonly string POWERUP = "PowerupBlock";
 	public static readonly string GROUND = "Ground";
-	public static string directory;
+	public static string directory=Application.dataPath;
 
 	public static bool IsSolid(string tag){
 		List<string> solidSet = new List<string>(new string[]{ SOLID, BREAKABLE, POWERUP, GROUND});

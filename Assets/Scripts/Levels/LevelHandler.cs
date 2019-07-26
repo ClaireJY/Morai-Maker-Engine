@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class LevelHandler : MonoBehaviour {
 	public float endOfLevel;
 	public static LevelHandler Instance;
-	public string levelName;
+	public string levelName = "test";
 
 	private GameObject[] players;
 	Dictionary<string,int> playerToScore;

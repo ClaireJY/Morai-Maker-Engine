@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#scp ./testserver.py eilab@128.61.69.16:./Desktop/UserStudyResults/testserver.py
+#scp ./testserver.py eilab@morrible.cc.gt.atl.ga.us:./Desktop/UserStudyResults/testserver.py
 import socket, csv, time, struct
 import numpy as np
 import tflearn
@@ -43,11 +43,7 @@ def StringToMap(strVal, allNames):
     for s1 in splits1:
         if len(s1)>0:
             splits2 = s1.split("*")
-            if len(splits2)>=3:
-                try:
-                    emptyMap[int(splits2[0])][int(splits2[1])][int(splits2[2])] = 1
-                except ValueError:
-                    print("VALUE ERRORED")
+            emptyMap[int(splits2[0])][int(splits2[1])][int(splits2[2])] = 1
     return emptyMap
 
 #In this 8 by 8 localized on the added point find what prompted it
@@ -101,11 +97,11 @@ fc = tflearn.fully_connected(conv3, 40*15*len(actions), activation='leaky_relu')
 mapShape = tf.reshape(fc, [-1,40,15,len(actions)])
 network = tflearn.regression(mapShape, optimizer='adam', metric='accuracy', loss='mean_square', learning_rate=0.004)
 model = tflearn.DNN(network)
-#model.load("testFull.tflearn")#smbANDtestFull
+model.load("testFull.tflearn")#smbANDtestFull
 print ("MODEL LOADED")
 #print ("CONV 1: "+str(conv.W))
 
-TCP_IP = '127.0.0.1'
+TCP_IP = '127.0.0.1'#'dillamond.cc.gt.atl.ga.us'#'128.61.65.211'#'morrible.cc.gt.atl.ga.us'
 TCP_PORT = 5015
 BUFFER_SIZE = 20400
 
@@ -148,7 +144,7 @@ while 1:
                                         prevAction[x+differenceX][y][z]+=0.1
                                     else:
                                         anyChange = True
-                                        prevAction[x+differenceX][y][z]=-0.1
+                                        prevAction[x+differenceX][y][z]-=0.1
                                         
                                         print ("REMOVED: "+str([actions[z], x+thisStartX,y]))
                                 elif currMap[x][y][z]>0:
